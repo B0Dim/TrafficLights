@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var buttonStart: UIButton!
     
-    var currentColor = 0
+    private var currentColor = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,25 +39,25 @@ class ViewController: UIViewController {
         }
     }
     
-    func changeTitleButton() {
+    private func changeTitleButton() {
         if buttonStart.titleLabel?.text == "START" {
             buttonStart.setTitle("NEXT", for: .normal)
         }
     }
     
-    func setRedColor() {
+    private func setRedColor() {
         currentColor = 1
         viewRed.alpha = 1
         viewGreen.alpha = 0.3
     }
     
-    func setYellowColor() {
+    private func setYellowColor() {
         currentColor = 2
         viewRed.alpha = 0.3
         viewYellow.alpha = 1
     }
     
-    func setGreenColor() {
+    private func setGreenColor() {
         currentColor = 3
         viewYellow.alpha = 0.3
         viewGreen.alpha = 1
