@@ -7,6 +7,12 @@
 
 import UIKit
 
+enum trafficColors {
+    case red
+    case yellow
+    case green
+}
+
 class ViewController: UIViewController {
 
     @IBOutlet weak var viewRed: UIView!
@@ -15,7 +21,10 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var buttonStart: UIButton!
     
-    private var currentColor = 0
+    private var currentColor = trafficColors.red
+    
+    private let lightIsOn: CGFloat = 1
+    private let lightIsOff: CGFloat = 0.3
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,40 +37,24 @@ class ViewController: UIViewController {
     }
 
     @IBAction func changeTrafficLightColor(_ sender: UIButton) {
-        changeTitleButton()
-        switch currentColor {
-        case 0, 3:
-            setRedColor()
-        case 1:
-            setYellowColor()
-        default:
-            setGreenColor()
-        }
-    }
-    
-    private func changeTitleButton() {
         if buttonStart.titleLabel?.text == "START" {
             buttonStart.setTitle("NEXT", for: .normal)
         }
+        
+        switch currentColor {
+        case .red:
+            currentColor = .yellow
+            viewRed.alpha = lightIsOn
+            viewGreen.alpha = lightIsOff
+        case .yellow:
+            currentColor = .green
+            viewRed.alpha = lightIsOff
+            viewYellow.alpha = lightIsOn
+        case .green:
+            currentColor = .red
+            viewYellow.alpha = lightIsOff
+            viewGreen.alpha = lightIsOn
+        }
     }
-    
-    private func setRedColor() {
-        currentColor = 1
-        viewRed.alpha = 1
-        viewGreen.alpha = 0.3
-    }
-    
-    private func setYellowColor() {
-        currentColor = 2
-        viewRed.alpha = 0.3
-        viewYellow.alpha = 1
-    }
-    
-    private func setGreenColor() {
-        currentColor = 3
-        viewYellow.alpha = 0.3
-        viewGreen.alpha = 1
-    }
-
 }
 
